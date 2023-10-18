@@ -1,8 +1,23 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from './page.module.css'
+import { useEffect } from 'react'
 
-export default function Home() {
+// export async function getData() {
+//   const res = await fetch('https://openapi.taifex.com.tw/v1/SingleStockFuturesMargining')
+//   // The return value is *not* serialized
+//   // You can return Date, Map, Set, etc.
+ 
+//   if (!res.ok) {
+//     // This will activate the closest `error.js` Error Boundary
+//     throw new Error('Failed to fetch data')
+//   }
+ 
+//   return res.json()
+// }
+
+export default async function Home() {
+  // const data = await getData()
   return (
     <main className={styles.main}>
       <div className={styles.description}>
