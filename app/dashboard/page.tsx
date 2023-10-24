@@ -24,7 +24,6 @@ function removeLastCharacter(inputString: string) {
   }
 }
 
-
 export default function Dashboard() {
   const { isLoading, error, data } = useQuery({
     queryKey: ['stockData'],
@@ -84,36 +83,36 @@ export default function Dashboard() {
   const options = data.map((item: StockData) => ({ id: item.UnderlyingSecurityCode, name: item.ContractName }))
 
   return (
-    <div className={styles.dashboard}>
+    <div className="p-2 box-border">
       <div>
-        <div className={styles.configForm}>
-          <h1 className={styles.title}>個股期貨保證金計算機</h1>
+        <div className="p-2 mb-2 bg-slate-100 border border-black border-solid flex flex-col justify-center">
+          <h1 className="text-xl mb-2 text-center">個股期貨保證金計算機</h1>
           <AutocompleteInput options={options} callback={handleSelected} />
-          <div className={styles.row}>
+          <div className="mb-2">
             <span>口數: </span>
-            <input value={qty} onChange={handleQtyChange} />
+            <input className="w-1/2 indent-2 outline-0 flex-1 p-0 text-xl rounded" value={qty} onChange={handleQtyChange} />
           </div>
-          <div className={styles.row}>
+          <div className="mb-2">
             <span>股價: </span>
-            <input value={price} onChange={handlePriceChange} />
+            <input className="w-1/2 indent-2 outline-0 flex-1 p-0 text-xl rounded" value={price} onChange={handlePriceChange} />
           </div>
-          <button className={styles.calButton} onClick={handleCal}>確認</button>
+          <button onClick={handleCal} className="my-2 px-7 py-2 text-center uppercase duration-300 text-white rounded block border-0 text-lg font-bold cursor-pointer select-none touch-manipulation bg-sky-500">確認</button>
         </div>
         {
           calResult ? (
-            <table className={styles.marginTable}>
+            <table className="w-full font-sans border-collapse">
               <thead>
                 <tr>
-                  <th>結算保證金</th>
-                  <th>維持保證金</th>
-                  <th>原始保證金</th>
+                  <th className="border border-slate-100 border-solid py-3 text-center text-white bg-sky-600">結算保證金</th>
+                  <th className="border border-slate-100 border-solid py-3 text-center text-white bg-sky-600">維持保證金</th>
+                  <th className="border border-slate-100 border-solid py-3 text-center text-white bg-sky-600">原始保證金</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>{calResult.clearMargin}</td>
-                  <td>{calResult.maintenanceMargin}</td>
-                  <td>{calResult.initialMargin}</td>
+                  <td className="border border-slate-300 border-solid pl-2 py-3">{calResult.clearMargin}</td>
+                  <td className="border border-slate-300 border-solid pl-2 py-3">{calResult.maintenanceMargin}</td>
+                  <td className="border border-slate-300 border-solid pl-2 py-3">{calResult.initialMargin}</td>
                 </tr>
               </tbody>
             </table>

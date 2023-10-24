@@ -1,6 +1,5 @@
 'use client'
 import React, { useState, useEffect, useRef } from 'react';
-import styles from './page.module.css'
 
 export interface SelectItem {
   id: string,
@@ -50,9 +49,10 @@ const Autocomplete: React.FC<AutocompleteProps> = ({ options, callback }) => {
   }, []);
 
   return (
-    <div className={styles.autocomplete} ref={autocompleteRef}>
-      <div className={styles.searchContainer}>
+    <div className="relative" ref={autocompleteRef}>
+      <div className="flex items-center w-full h-30px bg-white rounded mb-2">
         <input
+          className="flex-1 p-0 rounded outline-0 text-xl indent-2"
           type="text"
           value={inputValue}
           onChange={handleInputChange}
@@ -61,13 +61,19 @@ const Autocomplete: React.FC<AutocompleteProps> = ({ options, callback }) => {
       </div>
 
       {showOptions && (
-        <ul className={styles.options}>
-          {filteredOptions.map((option, i) => (
-            <li key={i} onClick={() => handleOptionSelect(option)}>
-              <span>{option.id}: </span>
-              <span>{option.name}</span>
-            </li>
-          ))}
+        <ul className="absolute w-4/5 bg-white top-32px max-h-72 overflow-y-auto border border-black border-solid box-border">
+          {
+            filteredOptions.length === 0 ? (
+              <li className="p-5 cursor-pointer">沒有符合的標的</li>
+            ) : (
+              filteredOptions.map((option, i) => (
+                <li key={i} className="p-5 cursor-pointer hover:bg-slate-200" onClick={() => handleOptionSelect(option)}>
+                  <span>{option.id}: </span>
+                  <span>{option.name}</span>
+                </li>
+              ))
+            )
+          }
         </ul>
       )}
     </div>
